@@ -1,0 +1,6 @@
+[
+  {"itemId": 1, "itemName": "HP Potion",     "itemType": "consumable", "iconPath": "Icons/Items/HpPotion",    "effectType": "heal_hp",       "effectValue": 100, "duration": 0},
+  {"itemId": 3, "itemName": "Attack Boost",  "itemType": "buff",       "iconPath": "Icons/Items/AtkBuff",     "effectType": "atk_boost",     "effectValue": 20,  "duration": 30},
+  {"itemId": 4, "itemName": "Speed Boost",   "itemType": "buff",       "iconPath": "Icons/Items/SpeedBuff",   "effectType": "speed_boost",   "effectValue": 30,  "duration": 20},
+  {"itemId": 5, "itemName": "Defense Boost", "itemType": "buff",       "iconPath": "Icons/Items/DefenseBuff", "effectType": "defense_boost", "effectValue": 15,  "duration": 25}
+]

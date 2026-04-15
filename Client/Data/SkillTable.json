@@ -1,0 +1,42 @@
+[
+  {
+    "skillId": 1,
+    "skillName": "FireBall",
+    "iconPath": "Bundle/Dark_Brown_GUI_kit/skill_icon/fire/FireBall",
+    "prefabPath" : "Bundle/Prefab/SkillPrefab/FireBallSkill",
+    "poolType": "FireBall",
+    "damages": [10, 18, 28, 40, 55],
+    "intervals": [3.0, 2.5, 2.0, 1.5, 1.0],
+    "speed" : 30.0
+  },
+  {
+    "skillId": 2,
+    "skillName": "IceArrow",
+    "iconPath": "Bundle/Dark_Brown_GUI_kit/skill_icon/ice/IceArrow",
+    "prefabPath" : "Bundle/Prefab/SkillPrefab/IceArrowSkill",
+    "poolType": "IceArrow",
+    "damages": [8, 14, 22, 32, 45],
+    "intervals": [1.5, 1.0, 0.8, 0.7, 0.5],
+    "speed" : 25.0
+  },
+  {
+    "skillId": 3,
+    "skillName": "Star",
+    "iconPath": "Bundle/Dark_Brown_GUI_kit/skill_icon/thunder/Star",
+    "prefabPath" : "Bundle/Prefab/SkillPrefab/StarBulletSkill",
+    "poolType": "Star",
+    "damages": [6, 11, 18, 26, 36],
+    "speed" : 50.0,
+    "starcount" : 3
+  },
+  {
+    "skillId": 4,
+    "skillName": "SwordBeam",
+    "iconPath": "Bundle/Dark_Brown_GUI_kit/skill_icon/dark/SwordBeam",
+    "prefabPath" : "Bundle/Prefab/SkillPrefab/RedSwordBeamSkill",
+    "poolType": "SwordBeam",
+    "damages": [12, 20, 30, 42, 58],
+    "intervals": [5, 4, 3, 2, 1],
+    "speed" : 20.0
+  }
+]

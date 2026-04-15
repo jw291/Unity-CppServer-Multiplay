@@ -1,0 +1,29 @@
+[
+  {
+    "monsterId" : 1,
+    "poolType" : "MonsterTypeA",
+    "prefabPath" : "Bundle/Prefab/MonsterPrefab/MonsterAType",
+    "maxHp" : 200,
+    "moveSpeed" : 25.0,
+    "attack" : 1,
+    "attackInterval" : 1.0
+  },
+  {
+    "monsterId" : 2,
+    "poolType" : "MonsterTypeB",
+    "prefabPath" : "Bundle/Prefab/MonsterPrefab/MonsterBType",
+    "maxHp" : 250,
+    "moveSpeed" : 20.0,
+    "attack" : 1,
+    "attackInterval" : 1.0
+  },
+  {
+    "monsterId" : 3,
+    "poolType" : "MonsterTypeC",
+    "prefabPath" : "Bundle/Prefab/MonsterPrefab/MonsterCType",
+    "maxHp" : 300,
+    "moveSpeed" : 20.0,
+    "attack" : 1,
+    "attackInterval" : 0.8
+  }
+]

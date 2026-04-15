@@ -1,0 +1,7 @@
+[
+  {"shopItemId": 1, "itemId": 1, "price": 100},
+  {"shopItemId": 2, "itemId": 2, "price": 150},
+  {"shopItemId": 3, "itemId": 3, "price": 200},
+  {"shopItemId": 4, "itemId": 4, "price": 150},
+  {"shopItemId": 5, "itemId": 5, "price": 180}
+]

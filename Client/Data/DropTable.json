@@ -1,0 +1,5 @@
+[
+  {"monsterId": 1, "minGold": 10, "maxGold": 30},
+  {"monsterId": 2, "minGold": 20, "maxGold": 50},
+  {"monsterId": 3, "minGold": 30, "maxGold": 80}
+]
