@@ -30,4 +30,12 @@ https://github.com/user-attachments/assets/c9fb22cd-bd92-47b0-9481-bd1c27d3416b
 - GameContext (Service Locator): 모든 Service/Repository를 한 싱글톤이 보유, Service 간 싱글톤 난립 방지 및 Room/Zone 구조로 확장 가능한 구조 구현
 - 행동을 State에 귀속: MonsterState::TakeDamage, PlayerState::Heal 등 데이터+관련 로직 같은 곳
 
+### 문제 발생 및 해결방안
 
+1. 플레이어, 몬스터 이동 패킷 과부하
+   - 0.n초 패킷 요청으로 변경 하 되, 레이턴시와 응답 딜레이를 상쇄하기 위해서 클라이언트 단에서 방향 정보를 통해 위치 예측 및 두 점 사이 이동을 러프하게 이동하도록 함
+2. 몬스터 수백 마리 이동 패킷 과부하
+   - 클라이언트 단 보간과 패킷 요청 최적화를 하였음에도 레이턴시가 발생하여 UDP 프로토콜 도입.
+3. 전투 중 아이템 사용, 상점 이용 ,인벤토리 패킷 레이턴시 발생
+   - DB, 게임로직, 네트워크로직 스레드 분리
+4. 
