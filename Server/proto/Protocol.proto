@@ -1,0 +1,292 @@
+syntax = "proto3";
+
+// msgId = 1
+message REQ_LOGIN {
+    string username = 1;
+}
+
+// msgId = 2
+message RES_LOGIN {
+    bool success = 1;
+    uint32 accountId = 2;
+    string username = 3;
+}
+
+// msgId = 3
+message REQ_ECHO {
+    string text = 1;
+}
+
+// msgId = 4
+message RES_ECHO {
+    string text = 1;
+}
+
+message REQ_PING
+{
+    int64 timeStamp = 1;
+}
+
+message RES_PONG
+{
+    int64 timeStamp = 1;
+}
+
+message RES_NOTIFY_ENTER
+{
+    uint32 accountId = 1;
+}
+
+message RES_NOTIFY_LEAVE
+{
+    uint32 accountId = 1;
+}
+
+message REQ_PLAYER_MOVE
+{
+    uint32 accountId = 1;
+    float posX = 2;
+    float posY = 3;
+    float dirX = 4;
+    float dirY = 5;
+    float moveSpeed = 6;
+}
+
+message RES_PLAYER_MOVE
+{
+    uint32 accountId = 1;
+    float posX = 2;
+    float posY = 3;
+    float dirX = 4;
+    float dirY = 5;
+    float moveSpeed = 6;
+}
+
+message REQ_GAME_START
+{
+    uint32 hostAccountId = 1;
+}
+
+message RES_GAME_START
+{
+    uint32 hostAccountId = 1;
+}
+
+message RES_NOTIFY_SKILL_START
+{
+
+}
+
+message REQ_SKILL_INFO
+{
+    uint32 accountId = 1;
+}
+
+message RES_SKILL_INFO
+{
+    uint32 accountId = 1;
+    map<uint32, uint32> skills = 2;  // key: skillId, value: skillLevel
+}
+
+message REQ_SKILL_ADD
+{
+    uint32 accountId = 1;
+    uint32 skillId = 2;
+}
+
+message RES_SKILL_ADD
+{
+    bool success = 1;
+    uint32 skillId = 2;
+    uint32 skillLevel = 3;
+}
+
+message REQ_SKILL_SUBTRACT
+{
+    uint32 accountId = 1;
+    uint32 skillId = 2;
+}
+
+message RES_SKILL_SUBTRACT
+{
+    bool success = 1;
+    uint32 skillId = 2;
+    uint32 skillLevel = 3;
+}
+
+message ProjectileInfo
+{
+    float posX = 1;
+    float posY = 2;
+    float dirX = 3;
+    float dirY = 4;
+    float speed = 5;
+}
+
+message REQ_SKILL_FIRE
+{
+    uint32 accountId = 1;
+    uint32 skillId = 2;
+    repeated ProjectileInfo projectiles = 3;
+}
+
+message RES_SKILL_FIRE
+{
+    uint32 accountId = 1;
+    uint32 skillId = 2;
+    repeated ProjectileInfo projectiles = 3;
+}
+
+message REQ_MONSTER_SPAWN
+{
+    repeated float corners = 1;
+}
+
+message MonsterSpawnInfo
+{
+    uint32 monsterId = 1;
+    int32 monsterSeq = 2;
+    float posX = 3;
+    float posY = 4;
+}
+
+message RES_MONSTER_SPAWN
+{
+    repeated MonsterSpawnInfo spawnInfo = 1;
+}
+
+message REQ_MONSTER_HIT
+{
+    int32 monsterSeq = 1;
+    uint32 accountId = 2;  // 공격한 플레이어
+    int32 damage = 3;
+}
+
+message RES_MONSTER_HIT
+{
+    int32 monsterSeq = 1;
+    int32 remainHp = 2;
+}
+
+message RES_MONSTER_DEAD
+{
+    int32 monsterSeq = 1;
+}
+
+message MonsterMoveInfo
+{
+    int32 monsterSeq = 1;
+    float posX = 2;
+    float posY = 3;
+    float dirX = 4;
+    float dirY = 5;
+}
+
+message REQ_MONSTER_MOVE
+{
+    repeated MonsterMoveInfo moveInfo = 1;
+}
+
+message REQ_UDP_REGISTER
+{
+    uint32 accountId = 1;
+}
+
+message RES_MONSTER_MOVE
+{
+    repeated MonsterMoveInfo moveInfo = 1;
+}
+
+// ── 상점/인벤토리/아이템 ──────────────────────────────────
+
+message ShopItemInfo
+{
+    uint32 shopItemId = 1;
+    uint32 itemId     = 2;
+    uint32 price      = 3;
+}
+
+message REQ_SHOP_INFO {}
+
+message RES_SHOP_INFO
+{
+    repeated ShopItemInfo items   = 1;
+    uint32                gold    = 2;
+}
+
+message REQ_BUY_ITEM
+{
+    uint32 shopItemId = 1;
+}
+
+message RES_BUY_ITEM
+{
+    bool   success    = 1;
+    uint32 shopItemId = 2;
+    uint32 itemId     = 3;
+    uint32 remainGold = 4;
+}
+
+message InventorySlot
+{
+    uint32 slotIndex  = 1;
+    uint32 itemId     = 2;
+    uint32 quantity   = 3;
+}
+
+message REQ_INVENTORY_INFO {}
+
+message RES_INVENTORY_INFO
+{
+    repeated InventorySlot slots = 1;
+}
+
+message REQ_USE_ITEM
+{
+    uint32 slotIndex = 1;
+}
+
+message RES_USE_ITEM
+{
+    bool   success   = 1;
+    uint32 slotIndex = 2;
+    uint32 itemId    = 3;
+}
+
+message RES_MONSTER_DROP
+{
+    int32  monsterSeq = 1;
+    uint32 dropId     = 2;
+    uint32 gold       = 3;
+    float  posX       = 4;
+    float  posY       = 5;
+}
+
+message REQ_PICKUP_DROP
+{
+    uint32 dropId = 1;
+}
+
+message RES_CURRENCY_UPDATE
+{
+    uint32 gold = 1;
+}
+
+message REQ_PLAYER_HIT
+{
+    int32  monsterSeq = 1;
+    uint32 accountId  = 2;
+}
+
+message RES_PLAYER_HIT
+{
+    uint32 accountId = 1;
+    int32  damage    = 2;
+    int32  remainHp  = 3;
+}
+
+
+message RES_PICKUP_DROP
+{
+    uint32 dropId = 1;
+}
