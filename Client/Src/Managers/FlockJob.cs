@@ -10,6 +10,7 @@ public struct FlockJob : IJobParallelFor
     [ReadOnly] public NativeArray<float2> playerPositions;
     [ReadOnly] public float balanceRadius;
     [ReadOnly] public float cohesionSeparationBalance;
+    [ReadOnly] public int count;
 
     public NativeArray<float2> results;
 
@@ -21,7 +22,7 @@ public struct FlockJob : IJobParallelFor
         int cohesionCount = 0;
         int separationCount = 0;
 
-        for (int i = 0; i < positions.Length; i++)
+        for (int i = 0; i < count; i++)
         {
             if (i == index) 
                 continue;

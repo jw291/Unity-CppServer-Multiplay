@@ -12,6 +12,8 @@ public class FlockManagerJob : FlockManagerBase
     private NativeArray<float2> positions;
     private NativeArray<float2> playerPositions;
     private NativeArray<float2> results;
+    private int capacity = 0;
+
     private JobHandle jobHandle;
     private List<Monster> scheduledMonsters = new List<Monster>();
     private bool jobScheduled = false;
@@ -45,15 +47,30 @@ public class FlockManagerJob : FlockManagerBase
         monsterTargets.Remove(monster);
     }
 
+    private void EnsureCapacity(int requiredCount)
+    {
+        if (requiredCount <= capacity)
+            return;
+
+        if (capacity > 0)
+        {
+            positions.Dispose();
+            playerPositions.Dispose();
+            results.Dispose();
+        }
+
+        capacity = math.max(requiredCount, capacity * 2);
+        positions = new NativeArray<float2>(capacity, Allocator.Persistent);
+        playerPositions = new NativeArray<float2>(capacity, Allocator.Persistent);
+        results = new NativeArray<float2>(capacity, Allocator.Persistent);
+    }
+
     private void FixedUpdate()
     {
         if (jobScheduled)
         {
             jobHandle.Complete();
             ApplyResults();
-            positions.Dispose();
-            playerPositions.Dispose();
-            results.Dispose();
             jobScheduled = false;
         }
 
@@ -61,10 +78,10 @@ public class FlockManagerJob : FlockManagerBase
         if (count == 0)
             return;
 
-        scheduledMonsters = new List<Monster>(monsters);
-        positions = new NativeArray<float2>(count, Allocator.TempJob);
-        playerPositions = new NativeArray<float2>(count, Allocator.TempJob);
-        results = new NativeArray<float2>(count, Allocator.TempJob);
+        EnsureCapacity(count);
+
+        scheduledMonsters.Clear();
+        scheduledMonsters.AddRange(monsters);
 
         for (int i = 0; i < count; i++)
         {
@@ -83,6 +100,7 @@ public class FlockManagerJob : FlockManagerBase
             playerPositions = playerPositions,
             balanceRadius = balanceRadius,
             cohesionSeparationBalance = cohesionSeparationBalance,
+            count = count,
             results = results
         };
 
@@ -132,8 +150,10 @@ public class FlockManagerJob : FlockManagerBase
     private void OnDestroy()
     {
         if (jobScheduled)
-        {
             jobHandle.Complete();
+
+        if (capacity > 0)
+        {
             positions.Dispose();
             playerPositions.Dispose();
             results.Dispose();
